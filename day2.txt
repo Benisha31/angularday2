@@ -1,0 +1,453 @@
+1.app.component.ts
+
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+  title='Calculator';
+
+  result:number;
+   getmultiply(num1,num2){
+      this.result=num1*num2;
+}
+  getdivide(num1,num2){
+  this.result=num1/num2;
+}
+  getadd(num1,num2){
+    this.result=num1*1+num2*1;
+}
+getsubtract(num1,num2){
+this.result=num1-num2;
+}
+  }
+................................................
+app.component.html
+
+<div style="text-align:center">
+  <h1>
+    {{title}}!
+  </h1>
+  <div style="width:100%;"><br>
+<input id="textbox1" #num1 type="number"><br><br>
+<input id="textbox2" #num2 type="number"><br><br>
+
+<button type="submit"(click)="getmultiply(num1.value,num2.value)" >Multiply</button>
+<button type="submit"(click)="getdivide(num1.value,num2.value)" >Divide</button>
+<button type="submit"(click)="getadd(num1.value,num2.value)" >Add</button>
+<button type="submit"(click)="getsubtract(num1.value,num2.value)" >Subtract</button>
+  </div><br><br>
+
+  <div id="result">
+ {{result}}
+</div>
+</div>
+
+////////////////////////////////////////////////////////////////////////////////////////
+4.html
+
+<div style="text-align:center">
+  <h1>
+    Conversion from meter to any
+  </h1>
+  <div style="width:100%;"><br>
+<input id="textbox1" #num1 type="number"><br><br>
+
+<button type="submit"(click)="getMilli(num1.value)" >Milli</button>
+<button type="submit"(click)="getCenti(num1.value)" >centi</button>
+<button type="submit"(click)="getDeci(num1.value)" >Deci</button>
+<button type="submit"(click)="getDeca(num1.value)" >Deca</button>
+<button type="submit"(click)="getHecto(num1.value)" >Hecto</button>
+<button type="submit"(click)="getKilo(num1.value)" >Kilo</button>
+</div><br><br>
+
+  <div id="result">
+ {{result}}
+</div>
+</div>
+
+........................................
+app.component.ts
+
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+  title='Calculator';
+
+  result:number;
+   getMilli(num1){
+      this.result=num1/1000;
+}
+  getCenti(num1){
+  this.result=num1/100;
+}
+  getDeci(num1){
+    this.result=num1/10;
+}
+getDeca(num1){
+this.result=num1*10;
+}
+getHecto(num1){
+  this.result=num1*100;
+}
+getKilo(num1){
+this.result=num1*1000;
+}
+  }
+
+//////////////////////////////////////////////////////////////////////////////
+5.html
+
+<div style="text-align:center">
+  <h1>
+  Welcome to task3  </h1><br>
+  <h2>User Details</h2>
+</div>
+<table align="center" >
+  <thead>
+    <th>id</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Email</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.id}}</td>
+      <td>{{user.firstName| uppercase}}</td>
+      <td>{{user.lastName}}</td>
+      <td>{{user.email}}</td>
+    </tr>
+  </tbody>
+</table>
+
+...................................................................
+app.component.ts
+
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+  public users=[{ id: '1', firstName: 'Roshini', lastName: 'Sundar', email: 'roshini@gmail.com' },
+  { id: '2', firstName: 'Guna', lastName: 'vignesh', email: 'guna@gmail.com' },
+  { id: '3', firstName: 'hema', lastName: 'selvaraj', email: 'hema@gmail.com' },
+  { id: '4', firstName: 'safana', lastName: 'abdul', email: 'safana@gmail.com' },
+  { id: '5', firstName: 'raji', lastName: 'jayakumar', email: 'raji@gmail.com' }];
+  }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+3.
+html
+
+<div style="text-align:center">
+  <h1>
+  Select your Fav Country & City </h1><br>
+  <h2> Select your Fav Country</h2>
+
+<select (change)="country($event)">
+  <option></option>
+  <option>India</option>
+  <option>Canada</option>
+</select>
+<div *ngIf=res>
+<h2> List of cities</h2>
+<select (change)="city($event)">
+    <option></option>
+    <option>Delhi</option>
+    <option>New York</option>
+  </select></div>
+  <div *ngIf=res1><br>
+  Your fav country:{{countryname}}<br>
+  Your fav city:{{cityname}}<br></div>
+......................................
+ts
+
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+  public cityname;
+  public countryname;
+  res:boolean
+  res1:boolean
+  country(event:any){
+        this.res=true;
+        this.countryname=event.target.value;
+  } 
+  city(event:any){
+    this.res1=true;
+    this.cityname=event.target.value;
+} 
+}
+
+/////////////////////////////////////////////////////////////
+6.html
+
+<div style="text-align:center">
+  <h1>
+Welcome to task5 </h1><br>
+  </div>
+<div>
+Type something in the textbox
+<input id="txt" #txt type="text">
+<button type="submit" (click)=pipe(txt.value)>Change</button>
+<h2>Uppercase Pipe</h2><br>
+{{name|uppercase}}
+<h2>LowerCase Pipe</h2><br>
+{{name|lowercase}}
+</div>
+.....................................................
+ts
+
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+public name;
+pipe(value){
+  this.name=value;
+}
+}
+
+//////////////////////////////////////////////////////////////////
+7.html
+
+<div style="text-align:center">
+  <h1>
+Welcome to task6</h1><br>
+  </div>
+<div>
+  <table border="1" width="500" >
+      <div style="text-align:center">  
+<h2>Date Pipe</h2>
+{{today|date}}<br>
+{{today|date:'shortTime'}}
+</div>
+</table>
+.....................................................
+ts
+
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+public today=new Date();
+}
+//////////////////////////////////////////////////////////////////////////////////////
+8. html
+
+<div style="text-align:center">
+  <h1>
+Welcome to tasks!</h1>
+<h1 style=color:blue>Todo App</h1>
+<input id="txt" #txt type="text">
+<button type="submit" (click)=todo(txt.value)>Add</button>
+<div *ngIf=res >
+  <li>{{name}}</li>
+</div>
+<div>
+
+.......................................................
+ts
+
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+  res:boolean
+  name
+  todo(value){
+        this.res=true;
+        this.name=value;
+}
+}
+///////////////////////////////////////////////////////////////////
+9.html
+
+<div style="text-align:center">
+  <h1 >
+Welcome to tasks9</h1>
+<h1>Check Greatest</h1>
+From<input id="num1"  #num1 type="number"><br><br>
+To<input id="num2"  #num2 type="number"><br><br>
+<button type="submit" (click)=todo(num1.value,num2.value)>Enter</button><br><br>
+<div *ngIf="res==false" >
+Enter some values and press Enter
+</div><div *ngIf="res==true" >
+  {{name}}
+</div>
+</div>
+...................................
+ts
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+  res:boolean=false
+  name:String
+
+  todo(num1,num2){
+     this.res=true;
+     if(num1>num2){
+       this.name='From value is Greater';
+     }else if(num2>num1){
+       this.name='To value is Greater';
+     }else if(num1=num2){
+       this.name='Both are equal';
+     }
+      
+}
+}
+//////////////////////////////////////////////////////////////
+11.html
+
+<div style="text-align:center">
+  <h1 >
+Welcome to BMI</h1>
+
+Weight in kg<input id="num1"  #num1 type="number"><br><br>
+Height in cm<input id="num2"  #num2 type="number"><br><br>
+<button type="submit" (click)=todo(num1.value,num2.value)>Calculate</button><br><br>
+
+The BMI for the given height and weight is{{name}}
+</div>
+...................................................
+ts
+
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+  res:boolean=false
+  name:number
+
+  todo(num1,num2){
+    this.name=num1/((num2/100)*(num2/100));
+      
+}
+}
+///////////////////////////////////////////////////////////////
+12.html
+
+<div style="text-align:center">
+  <h1 >
+Welcome to BMI</h1>
+
+Weight in kg<input id="num1"  #num1 type="number"><br><br>
+Height in cm<input id="num2"  #num2 type="number"><br><br>
+<button type="submit" (click)=todo(num1.value,num2.value)>Calculate</button><br><br>
+
+The BMI for the given height and weight is {{name}}
+</div>
+......................................................
+ts
+
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+  name:String
+  num:number
+
+  todo(num1,num2){
+    this.num=num1/((num2/100)*(num2/100));
+    if(this.num<24){
+      this.name='Normal';
+    }
+    else if(this.num>=25 && this.num<=29){
+            this.name='Overweight';
+    }
+   else if(this.num>=30 && this.num<=34){
+      this.name='Obesity with low risk';
+}
+ else if(this.num>=35 && this.num<=39){
+  this.name='Obesity with moderate risk';
+}
+ else if(this.num>=40){
+  this.name='High Obesity';
+}    
+}
+}
+////////////////////////////////////////////////////////////////////////////
+10.html
+
+<div style="text-align:center">
+  <h1 >
+Welcome to Task10</h1>
+<h1>Todo App</h1>
+<input id="txt" #txt placeholder="add todo" type="text">
+<button type="submit" (click)=todo(txt.value)>Add</button>
+<li *ngFor="let i of res|slice :1:5">{{i}}</li>
+<h1>Slice Pipe</h1><br>
+<div *ngIf="b==true" style="text-align:center">
+<ul *ngFor="let i of res|slice :2:5">{{i}}</ul></div>
+</div>
+.................................................................
+ts
+
+import { Component } from '@angular/core';
+import { compileNgModuleFromRender2 } from '@angular/compiler/src/render3/r3_module_compiler';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.styl']
+})
+export class AppComponent {
+  res=[];
+  b:boolean
+  todo(value){
+    this.b=true;
+    this.res.push(value);
+}
+}
+///////////////////////////////////////////////////////////////////////////////////////////////
